@@ -1,8 +1,8 @@
-# HTTP Stateless Session for Java
+## HTTP Stateless Session for Java
 
 HTTP Stateless Session help you to build stateless web application base on Java.
 
-## What are the benefits of a stateless web application?
+What are the benefits of a stateless web application?
 
 1. Reduces memory usage.
 2. Easier to support server farms.
@@ -10,18 +10,18 @@ HTTP Stateless Session help you to build stateless web application base on Java.
 
 Reference: [http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-a-stateless-web-application] (http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-a-stateless-web-application)
 
-## Limitation
+### Limitation
 
 1. Data total size cannot over 4KB, because all session data is storded in cookie. 
 2. Data type must be String.
 
-# Basic Usage
+## Basic Usage
 
-## Dependency: 
+### Dependency: 
 
 * commons-codec 1.7 or above
 
-## Basic Web.xml Config
+### Basic Web.xml Config
 
 ```
 <filter>
@@ -51,7 +51,7 @@ If session data was modified by client, all session data will destroy and create
 5. `SESSION_PATH` is a session cookie path on current domain. Default: `/`.
 6. `SESSION_DOMAIN` is a session cookie domain. Default is null.
 
-## Java Code Example
+### Java Code Example
 
 ```
 StatelessSession session = StatelessSessionHolder.get();
