@@ -21,7 +21,7 @@ Reference: [http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-
 ### Dependency: 
 
 * commons-codec 1.7 or above
-* gsno 2.2.2 or above
+* gson 2.2.2 or above
 
 ### Basic Web.xml Config
 
