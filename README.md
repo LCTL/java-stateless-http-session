@@ -1,6 +1,7 @@
 ## HTTP Stateless Session for Java
 
 HTTP Stateless Session help you to build stateless web application base on Java.
+Stateless Session compliable with `HttpSession`.
 
 What are the benefits of a stateless web application?
 
@@ -20,6 +21,7 @@ Reference: [http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-
 ### Dependency: 
 
 * commons-codec 1.7 or above
+* gsno 2.2.2 or above
 
 ### Basic Web.xml Config
 
@@ -54,9 +56,7 @@ If session data was modified by client, all session data will destroy and create
 ### Java Code Example
 
 ```
-StatelessSession session = StatelessSessionHolder.get();
-session.put("message", "Hello World");
-session.get("message");
-session.remove("message");
-System.out.println(session.getSessionId());
+HttpSession session = request.getSession(true);
+session.setAttribute("user", "lawrence");
+session.getAttribute("user");
 ```

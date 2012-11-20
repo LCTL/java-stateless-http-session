@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ctlok.web.session.crypto.CryptoUtils;
 import com.ctlok.web.session.crypto.Encryptor;
@@ -37,6 +39,7 @@ public class StatelessSessionFilter implements Filter {
     private static final String DEFAULT_SESSION_PATH = "/";
     private static final String DEFAULT_SESSION_DOMAIN = null;
     
+    private FilterConfig filterConfig;
     private String hmacSha1Key;
     private String secretkey;
     private Encryptor encryptor;
@@ -48,8 +51,9 @@ public class StatelessSessionFilter implements Filter {
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        this.hmacSha1Key = filterConfig.getInitParameter(PARAM_HMAC_SHA1_KEY);
+        this.filterConfig = filterConfig;
         
+        this.hmacSha1Key = filterConfig.getInitParameter(PARAM_HMAC_SHA1_KEY);
         if (this.hmacSha1Key == null){
             throw new ServletException("HMAC_SHA1_KEY is mandatory value");
         }
@@ -88,19 +92,22 @@ public class StatelessSessionFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) resp;
         
-        try {
-            StatelessSessionHolder.put(
-                    Factory.createStatelessSession(
+        final StatelessSessionConfig sessionConfig = createStatelessSessionConfig(request, response);
+        final HttpServletRequest requestWrapper = new RequestWrapper(request, sessionConfig);
+
+        chain.doFilter(requestWrapper, response);
+        
+    }
+    
+    protected StatelessSessionConfig createStatelessSessionConfig(
+            final HttpServletRequest request,
+            final HttpServletResponse response){
+    
+        return new StatelessSessionConfig(this.filterConfig.getServletContext(), 
                             request, response, this.hmacSha1Key,
                             this.secretkey, this.encryptor,
                             this.sessionName, this.sessionMaxAge,
-                            this.sessionPath, this.sessionDomain));
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-        
-        chain.doFilter(request, response);
-        StatelessSessionHolder.remove();
+                            this.sessionPath, this.sessionDomain);
         
     }
 
@@ -130,6 +137,33 @@ public class StatelessSessionFilter implements Filter {
         }else{
             return false;
         }
+    }
+    
+    static class RequestWrapper extends HttpServletRequestWrapper{
+
+        private final StatelessSessionConfig sessionConfig;
+        
+        private HttpSession session;
+        
+        public RequestWrapper(final HttpServletRequest request,
+                final StatelessSessionConfig sessionConfig) {
+            super(request);
+            this.sessionConfig = sessionConfig;
+        }
+
+        @Override
+        public HttpSession getSession(boolean create) {
+            if (this.session == null){
+                this.session = new StatelessSession(this.sessionConfig);
+            }
+            return session;
+        }
+
+        @Override
+        public HttpSession getSession() {
+            return this.session;
+        }
+
     }
 
 }

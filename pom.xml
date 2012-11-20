@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ctlok</groupId>
     <artifactId>stateless-http-session</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>Stateless HTTP Session</name>
 
@@ -31,6 +31,7 @@
         
         <dependency.servlet-api.version>2.5</dependency.servlet-api.version>
         <dependency.commons-codec.version>1.7</dependency.commons-codec.version>
+        <dependency.gson.version>2.2.2</dependency.gson.version>
         
         <plugin.maven-compiler.version>2.3.2</plugin.maven-compiler.version>
     </properties>
@@ -46,8 +47,15 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.7</version>
+            <version>${dependency.commons-codec.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${dependency.gson.version}</version>
+        </dependency>
+            
     </dependencies>
 
     <build>
