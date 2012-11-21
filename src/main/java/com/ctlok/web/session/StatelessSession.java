@@ -231,7 +231,7 @@ public class StatelessSession implements HttpSession {
 
     @Override
     public void removeAttribute(String name) {
-        this.removeAttribute(name);
+        this.attributes.remove(name);
         this.flush();
     }
 

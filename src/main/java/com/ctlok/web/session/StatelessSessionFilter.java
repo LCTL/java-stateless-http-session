@@ -9,6 +9,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -141,6 +142,7 @@ public class StatelessSessionFilter implements Filter {
     
     static class RequestWrapper extends HttpServletRequestWrapper{
 
+        private final HttpServletRequest request;
         private final StatelessSessionConfig sessionConfig;
         
         private HttpSession session;
@@ -148,7 +150,12 @@ public class StatelessSessionFilter implements Filter {
         public RequestWrapper(final HttpServletRequest request,
                 final StatelessSessionConfig sessionConfig) {
             super(request);
+            this.request = request;
             this.sessionConfig = sessionConfig;
+            
+            if (isSessionCookieExist(sessionConfig.getSessionName())){
+                this.session = createStatelessSession(sessionConfig);
+            }
         }
 
         @Override
@@ -162,6 +169,21 @@ public class StatelessSessionFilter implements Filter {
         @Override
         public HttpSession getSession() {
             return this.session;
+        }
+        
+        protected HttpSession createStatelessSession(final StatelessSessionConfig sessionConfig){
+            return new StatelessSession(this.sessionConfig);
+        }
+        
+        private boolean isSessionCookieExist(final String sessionName){
+            boolean result = false;
+            for (final Cookie cookie: request.getCookies()){
+                if (cookie.getName().equals(sessionName)){
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
     }
