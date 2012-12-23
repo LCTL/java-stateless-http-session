@@ -160,7 +160,7 @@ public class StatelessSessionFilter implements Filter {
 
         @Override
         public HttpSession getSession(boolean create) {
-            if (this.session == null){
+            if (create && this.session == null){
                 this.session = new StatelessSession(this.sessionConfig);
             }
             return session;
