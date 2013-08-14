@@ -11,20 +11,22 @@ public class StatelessSessionConfig {
     private final ServletContext servletContext;
     private final HttpServletRequest request;
     private final HttpServletResponse response;
-    
+
     private final String hmacSHA1Key;
     private final String secretKey;
     private final Encryptor encryptor;
     private final String sessionName;
-    
+
     private final int sessionMaxAge;
     private final String path;
     private final String domain;
-    
+    private final boolean httpOnly;
+
     public StatelessSessionConfig(ServletContext servletContext,
             HttpServletRequest request, HttpServletResponse response,
             String hmacSHA1Key, String secretKey, Encryptor encryptor,
-            String sessionName, int sessionMaxAge, String path, String domain) {
+            String sessionName, int sessionMaxAge, String path, String domain,
+            boolean httpOnly) {
         super();
         this.servletContext = servletContext;
         this.request = request;
@@ -36,39 +38,51 @@ public class StatelessSessionConfig {
         this.sessionMaxAge = sessionMaxAge;
         this.path = path;
         this.domain = domain;
+        this.httpOnly = httpOnly;
     }
-    
+
     public ServletContext getServletContext() {
         return servletContext;
     }
+
     public HttpServletRequest getRequest() {
         return request;
     }
+
     public HttpServletResponse getResponse() {
         return response;
     }
+
     public String getHmacSHA1Key() {
         return hmacSHA1Key;
     }
+
     public String getSecretKey() {
         return secretKey;
     }
+
     public Encryptor getEncryptor() {
         return encryptor;
     }
+
     public String getSessionName() {
         return sessionName;
     }
+
     public int getSessionMaxAge() {
         return sessionMaxAge;
     }
+
     public String getPath() {
         return path;
     }
+
     public String getDomain() {
         return domain;
     }
-    
-    
-    
+
+    public boolean isHttpOnly() {
+        return httpOnly;
+    }
+
 }

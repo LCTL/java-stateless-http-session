@@ -144,7 +144,8 @@ public class StatelessSession implements HttpSession {
             
             cookie.setMaxAge(this.config.getSessionMaxAge());
             cookie.setPath(this.config.getPath());
-    
+            cookie.setHttpOnly(this.config.isHttpOnly());
+            
             if (this.config.getDomain() != null){
                 cookie.setDomain(this.config.getDomain());
             }

@@ -32,6 +32,7 @@ public class StatelessSessionFilter implements Filter {
     private static final String PARAM_SESSION_MAX_AGE = "SESSION_MAX_AGE";
     private static final String PARAM_SESSION_PATH = "SESSION_PATH";
     private static final String PARAM_SESSION_DOMAIN = "SESSION_DOMAIN";
+    private static final String PARAM_SESSION_HTTP_ONLY = "HTTP_ONLY";
     
     private static final String DEFAULT_ENCRYPTION_IMPL_CLASS = "com.ctlok.web.session.crypto.AesEncryptor";
     
@@ -39,6 +40,7 @@ public class StatelessSessionFilter implements Filter {
     private static final String DEFAULT_SESSION_MAX_AGE = "-1";
     private static final String DEFAULT_SESSION_PATH = "/";
     private static final String DEFAULT_SESSION_DOMAIN = null;
+    private static final String DEFAULT_SESSION_HTTP_ONLY = "true";
     
     private FilterConfig filterConfig;
     private String hmacSha1Key;
@@ -49,6 +51,7 @@ public class StatelessSessionFilter implements Filter {
     private int sessionMaxAge;
     private String sessionPath;
     private String sessionDomain;
+    private boolean httpOnly;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -84,6 +87,7 @@ public class StatelessSessionFilter implements Filter {
         this.sessionMaxAge = Integer.valueOf(this.getConfig(filterConfig, PARAM_SESSION_MAX_AGE, DEFAULT_SESSION_MAX_AGE));
         this.sessionPath = this.getConfig(filterConfig, PARAM_SESSION_PATH, DEFAULT_SESSION_PATH);
         this.sessionDomain = this.getConfig(filterConfig, PARAM_SESSION_DOMAIN, DEFAULT_SESSION_DOMAIN);
+        this.httpOnly = Boolean.valueOf(this.getConfig(filterConfig, PARAM_SESSION_HTTP_ONLY, DEFAULT_SESSION_HTTP_ONLY));
     }
 
     @Override
@@ -108,7 +112,8 @@ public class StatelessSessionFilter implements Filter {
                             request, response, this.hmacSha1Key,
                             this.secretkey, this.encryptor,
                             this.sessionName, this.sessionMaxAge,
-                            this.sessionPath, this.sessionDomain);
+                            this.sessionPath, this.sessionDomain,
+                            this.httpOnly);
         
     }
 
