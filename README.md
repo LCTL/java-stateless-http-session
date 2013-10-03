@@ -23,6 +23,16 @@ Reference: [http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-
 * commons-codec 1.7 or above
 * gson 2.2.2 or above
 
+### Maven
+
+```
+<dependency>
+    <groupId>com.ctlok</groupId>
+    <artifactId>stateless-http-session</artifactId>
+    <version>1.2.2</version>
+</dependency>
+```
+
 ### Basic Web.xml Config
 
 ```
