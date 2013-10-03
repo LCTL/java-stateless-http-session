@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ctlok</groupId>
     <artifactId>stateless-http-session</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
     <name>Stateless HTTP Session</name>
     <description>HTTP Stateless Session for Java</description>
@@ -21,7 +21,7 @@
         <url>https://github.com/lawrence0819/java-http-stateless-session</url>
         <connection>scm:git:git://github.com/lawrence0819/java-http-stateless-session.git</connection>
         <developerConnection>scm:git:git@github.com:lawrence0819/java-http-stateless-session.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>stateless-http-session-1.2.2</tag>
     </scm>
 
     <developers>
