@@ -18,9 +18,9 @@
     </licenses>
     
     <scm>
-        <url>https://github.com/lawrence0819/java-http-stateless-session</url>
-        <connection>scm:git:git://github.com/lawrence0819/java-http-stateless-session.git</connection>
-        <developerConnection>scm:git:git@github.com:lawrence0819/java-http-stateless-session.git</developerConnection>
+        <url>https://github.com/lawrence0819/java-stateless-http-session</url>
+        <connection>scm:git:git://github.com/lawrence0819/java-stateless-http-session.git</connection>
+        <developerConnection>scm:git:git@github.com:lawrence0819/java-stateless-http-session.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
