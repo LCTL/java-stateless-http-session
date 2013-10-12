@@ -29,7 +29,7 @@ Reference: [http://stackoverflow.com/questions/5539823/what-are-the-benefits-of-
 <dependency>
     <groupId>com.ctlok</groupId>
     <artifactId>stateless-http-session</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
 </dependency>
 ```
 
