@@ -207,7 +207,7 @@ public class StatelessSession implements HttpSession {
 
     @Override
     public Enumeration<String> getAttributeNames() {
-        return Collections.enumeration(this.attributes.values());
+        return Collections.enumeration(this.attributes.keySet());
     }
 
     @Override
