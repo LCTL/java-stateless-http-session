@@ -1,4 +1,4 @@
-## HTTP Stateless Session for Java
+## HTTP Stateless / Cookie-based Session for Java
 
 HTTP Stateless Session help you to build stateless web application base on Java.
 Stateless Session compliable with `HttpSession`.
