@@ -173,7 +173,7 @@ public class StatelessSessionFilter implements Filter {
 
         @Override
         public HttpSession getSession() {
-            return this.session;
+            return getSession(true);
         }
         
         protected HttpSession createStatelessSession(final StatelessSessionConfig sessionConfig){
