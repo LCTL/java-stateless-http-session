@@ -95,7 +95,7 @@ public class StatelessSession implements HttpSession {
     protected boolean isValidSessionCookieValue(final String cookieValue){
         final Map<String, String> map = jsonToMap(cookieValue);
         
-        if (map.containsKey(CHECKSUM_KEY) 
+        if (map != null && map.containsKey(CHECKSUM_KEY) 
                 && map.containsKey(ID_KEY) 
                 && map.containsKey(CREATION_TIME_KEY)){
             
